@@ -1,19 +1,20 @@
 package com.ade.consumer;
 
-import java.util.Queue;
-
-import com.ade.consumer.RabbitMQConfig;
+import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ConsumerService {
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
 
     @Autowired
+    @Qualifier("myQueue")
+    private Queue queue;
+
+
+    @Autowired
+    @Qualifier("myQueue")
     private Queue queue;
 
     @RabbitListener(queues = "myQueue")
